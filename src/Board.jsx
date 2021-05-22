@@ -45,7 +45,7 @@ class Board extends Component {
   render() {
     const board = this.state.board;
 
-    const winConditions =
+    const win =
       // if "X" wins
       Object.values(board.row1).every(box => box === "X")
       || Object.values(board.row2).every(box => box === "X")
@@ -65,10 +65,16 @@ class Board extends Component {
       || [board.row1.box3, board.row2.box6, board.row3.box9].every(box => box === "O")
       || [board.row1.box1, board.row2.box5, board.row3.box9].every(box => box === "O")
       || [board.row1.box3, board.row2.box5, board.row3.box7].every(box => box === "O");
+      
+      // if the game is a tie
+      const tie =
+        Object.values(board.row1).every(box => box === "X" || box === "O")
+        && Object.values(board.row2).every(box => box === "X" || box === "O")
+        && Object.values(board.row3).every(box => box === "X" || box === "O");
     
     // alert is wrapped in setTimeout because it prevents the DOM from updating 
     // without it, the winning "X" or "O" would not appear until the alert is closed
-    if (winConditions) {
+    if (win || tie) {
       if(setTimeout(() => alert("Game Over"), 10)){
         window.location.reload();
       }
