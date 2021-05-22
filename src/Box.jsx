@@ -11,8 +11,9 @@ function Box( {board, row, box, toggle} ) {
         fontFamily: "cursive", 
         fontSize: "32px",
       }}
-      onClick={() => toggle(row, box)}>
-        {board[row][box]}
+      onClick={() => toggle(row, box)}
+    >
+      {board[row][box]}
     </button>
   );
 }
